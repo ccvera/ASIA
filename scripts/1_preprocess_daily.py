@@ -77,24 +77,24 @@ def get_global_variables(parent_dir,folders,folder,out_dir):
 
         # Configuramos nuestro nuevo ficher nc 
         # Definimos las dimensiones que tendran las distintas variables
-        nc_new.createDimension('lat',dim_lat)
-        nc_new.createDimension('lon',dim_lon)
+        nc_new.createDimension('south_north',dim_lat)
+        nc_new.createDimension('west_east',dim_lon)
         nc_new.createDimension('time',dim_time)
-        nc_new.createDimension('alt',dim_alt)
+        nc_new.createDimension('bottom_top',dim_alt)
 
-        latitude        = nc_new.createVariable('XLAT','f4',('time','lat','lon'))
-        longitude       = nc_new.createVariable('XLONG','f4',('time','lat','lon'))
-	height		= nc_new.createVariable('HGT','f4',('time','lat','lon'))
-        rainc           = nc_new.createVariable('RAINC','f4',('time','lat','lon'))
-	rainnc		= nc_new.createVariable('RAINNC','f4',('time','lat','lon'))
+        latitude        = nc_new.createVariable('XLAT','f4',('time','south_north','west_east'))
+        longitude       = nc_new.createVariable('XLONG','f4',('time','south_north','west_east'))
+	height		= nc_new.createVariable('HGT','f4',('time','south_north','west_east'))
+        rainc           = nc_new.createVariable('RAINC','f4',('time','south_north','west_east'))
+	rainnc		= nc_new.createVariable('RAINNC','f4',('time','south_north','west_east'))
 	date		= nc_new.createVariable('DATE',str,'time')
 
-	Qvapor		= nc_new.createVariable('QVAPOR','f4',('time','alt','lat','lon'))
-	Qcloud		= nc_new.createVariable('QCLOUD','f4',('time','alt','lat','lon'))
-	Qrain		= nc_new.createVariable('QRAIN','f4',('time','alt','lat','lon'))
-        Qice	        = nc_new.createVariable('QICE','f4',('time','alt','lat','lon'))
-        Qsnow           = nc_new.createVariable('QSNOW','f4',('time','alt','lat','lon'))
-        Qgraup          = nc_new.createVariable('QGRAUP','f4',('time','alt','lat','lon'))
+	Qvapor		= nc_new.createVariable('QVAPOR','f4',('time','bottom_top','south_north','west_east'))
+	Qcloud		= nc_new.createVariable('QCLOUD','f4',('time','bottom_top','south_north','west_east'))
+	Qrain		= nc_new.createVariable('QRAIN','f4',('time','bottom_top','south_north','west_east'))
+        Qice	        = nc_new.createVariable('QICE','f4',('time','bottom_top','south_north','west_east'))
+        Qsnow           = nc_new.createVariable('QSNOW','f4',('time','bottom_top','south_north','west_east'))
+        Qgraup          = nc_new.createVariable('QGRAUP','f4',('time','bottom_top','south_north','west_east'))
 
 	# Obtenemos todas las varialbles deseadas para cada dia
 	files = os.listdir(parent_dir + "/" + folder)
