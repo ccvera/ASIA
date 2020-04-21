@@ -6,10 +6,22 @@ import numpy as np
 import datetime as dt
 import argparse
 from optparse import OptionParser, Values
+from wrf import getvar, interplevel
 
-def get_variables(parent_dir,directory,nc_file):
+def get_temperature(nc):
 
-	nc      = netCDF4.Dataset(parent_dir + "/" + directory + "/" + nc_file, 'r', format='NETCDF4')
+	T	= getvar(nc, "temp", units="degC")
+	hPa	= getvar(nc, "pressure")
+
+	T_500	= interplevel(T, hPa, 500.)
+	T_700   = interplevel(T, hPa, 700.)
+	T_850   = interplevel(T, hPa, 850.)
+
+	return T_500[:,:],T_700[:,:],T_850[:,:]
+
+def get_variables(nc):
+
+	#nc      = netCDF4.Dataset(parent_dir + "/" + directory + "/" + nc_file, 'r', format='NETCDF4')
 	time	= nc.variables['XTIME']
 	lat     = nc.variables['XLAT'][0,:,:]           
         lon     = nc.variables['XLONG'][0,:,:]          
@@ -96,6 +108,10 @@ def get_global_variables(parent_dir,folders,folder,out_dir):
         Qsnow           = nc_new.createVariable('QSNOW','f4',('time','bottom_top','south_north','west_east'))
         Qgraup          = nc_new.createVariable('QGRAUP','f4',('time','bottom_top','south_north','west_east'))
 
+	T_500		= nc_new.createVariable('T_500','f4',('time','south_north','west_east'))
+	T_700		= nc_new.createVariable('T_700','f4',('time','south_north','west_east'))
+	T_850           = nc_new.createVariable('T_850','f4',('time','south_north','west_east'))
+
 	# Obtenemos todas las varialbles deseadas para cada dia
 	files = os.listdir(parent_dir + "/" + folder)
 	files.sort()
@@ -105,8 +121,10 @@ def get_global_variables(parent_dir,folders,folder,out_dir):
 		print(folder)
 		print("Obteniendo datos de precipitacion para la hora...")
 		print(nc_file)
+		nc_file 	= netCDF4.Dataset(parent_dir + "/" + folder + "/" + nc_file, 'r', format='NETCDF4')
 		print(i)
-		date[i],latitude[i,:,:],longitude[i,:,:],height[i,:,:],rainc[i,:,:],rainnc[i,:,:],Qvapor[i,:,:,:],Qcloud[i,:,:,:],Qrain[i,:,:,:],Qice[i,:,:,:],Qsnow[i,:,:,:],Qgraup[i,:,:,:]	= get_variables(parent_dir,folder,nc_file)
+		date[i],latitude[i,:,:],longitude[i,:,:],height[i,:,:],rainc[i,:,:],rainnc[i,:,:],Qvapor[i,:,:,:],Qcloud[i,:,:,:],Qrain[i,:,:,:],Qice[i,:,:,:],Qsnow[i,:,:,:],Qgraup[i,:,:,:]	= get_variables(nc_file)
+		T_500[i,:,:],T_700[i,:,:],T_850[i,:,:] = get_temperature(nc_file)
 
         nc_new.close()
 
