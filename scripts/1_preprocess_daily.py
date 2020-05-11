@@ -2,15 +2,16 @@ import os
 import netCDF4
 import pandas as pd
 import numpy as np
+import time as tm
 
-import datetime as dt
+import datetime
 import argparse
 from optparse import OptionParser, Values
 from wrf import getvar, interplevel
 
 def get_temperature(nc):
 
-	T	= getvar(nc, "temp", units="degC")
+	T	= getvar(nc, "temp", units="K")
 	hPa	= getvar(nc, "pressure")
 
 	T_500	= interplevel(T, hPa, 500.)
@@ -19,9 +20,40 @@ def get_temperature(nc):
 
 	return T_500[:,:],T_700[:,:],T_850[:,:]
 
+def get_razon_de_mezcla(nc):
+
+	hPa     = getvar(nc, "pressure")
+
+	qvapor  = getvar(nc,'QVAPOR')
+        qcloud  = getvar(nc,'QCLOUD')
+        qrain   = getvar(nc,'QRAIN')
+        qice    = getvar(nc,'QICE')
+        qsnow   = getvar(nc,'QSNOW')
+        qgraup  = getvar(nc,'QGRAUP')
+
+	qvapor_500	= interplevel(qvapor, hPa, 500.)
+	qvapor_700      = interplevel(qvapor, hPa, 700.)
+	qvapor_850      = interplevel(qvapor, hPa, 850.)
+	qcloud_500      = interplevel(qcloud, hPa, 500.)
+	qcloud_700      = interplevel(qcloud, hPa, 700.)
+	qcloud_850      = interplevel(qcloud, hPa, 850.)
+	qrain_500      	= interplevel(qrain, hPa, 500.)
+	qrain_700      	= interplevel(qrain, hPa, 700.)
+	qrain_850      	= interplevel(qrain, hPa, 850.)
+	qice_500	= interplevel(qice, hPa, 500.)
+	qice_700        = interplevel(qice, hPa, 700.)
+	qice_850        = interplevel(qice, hPa, 850.)
+	qsnow_500       = interplevel(qsnow, hPa, 500.)
+	qsnow_700       = interplevel(qsnow, hPa, 700.)
+	qsnow_850       = interplevel(qsnow, hPa, 850.)
+	qgraup_500      = interplevel(qgraup, hPa, 500.)
+	qgraup_700      = interplevel(qgraup, hPa, 700.)
+	qgraup_850      = interplevel(qgraup, hPa, 850.)
+
+	return qvapor_500[:,:],qvapor_700[:,:],qvapor_850[:,:],qcloud_500[:,:],qcloud_700[:,:],qcloud_850[:,:],qrain_500[:,:],qrain_700[:,:],qrain_850[:,:],qice_500[:,:],qice_700[:,:],qice_850[:,:],qsnow_500[:,:],qsnow_700[:,:],qsnow_850[:,:],qgraup_500[:,:],qgraup_700[:,:],qgraup_850[:,:]
+
 def get_variables(nc):
 
-	#nc      = netCDF4.Dataset(parent_dir + "/" + directory + "/" + nc_file, 'r', format='NETCDF4')
 	time	= nc.variables['XTIME']
 	lat     = nc.variables['XLAT'][0,:,:]           
         lon     = nc.variables['XLONG'][0,:,:]          
@@ -29,22 +61,25 @@ def get_variables(nc):
 	rainc	= nc.variables['RAINC'][0,:,:]
 	rainnc  = nc.variables['RAINNC'][0,:,:]
 
-	qvapor	= nc.variables['QVAPOR'][0,:,:,:]
-	qcloud	= nc.variables['QCLOUD'][0,:,:,:]
-	qrain	= nc.variables['QRAIN'][0,:,:,:]
-	qice	= nc.variables['QICE'][0,:,:,:]
-        qsnow   = nc.variables['QSNOW'][0,:,:,:]
-        qgraup  = nc.variables['QGRAUP'][0,:,:,:]
-	
 	dtime   	= netCDF4.num2date(time[:],time.units)
 	str_time        = [i.strftime("%Y-%m-%d[%H:%M:%S]") for i in dtime]
 
+	#timestamp	= tm.mktime(tm.strptime([i.strftime("%Y-%m-%s %H:%M:%S") for i in dtime], "%Y-%m-%d %H:%M:%S"))
+
+	date_string = "11/22/2019"
+	str2 = ""
+	d = datetime.datetime.strptime(str2.join(str_time), "%Y-%m-%d[%H:%M:%S]")
+	#timestamp = datetime.datetime.timestamp(d)
+	timestamp = tm.mktime(d.timetuple())
+	#print(timestamp)
+
 	print("Obteniendo fecha...")
 	print(str_time)
+	print(timestamp)
 	
 	# Convertimos la lista a un string para que lo acepte netCDF
 	str1 = " "     
-	return str1.join(str_time),lat,lon,hei,rainc,rainnc,qvapor,qcloud,qrain,qice,qsnow,qgraup
+	return str1.join(str_time),timestamp,lat,lon,hei,rainc,rainnc
 
 
 def get_global_variables(parent_dir,folders,folder,out_dir):
@@ -78,6 +113,8 @@ def get_global_variables(parent_dir,folders,folder,out_dir):
 
         # Dimensiones
         dim_lat, dim_lon  	= lat.shape
+	#fol 			= os.listdir(parent_dir+"/"+folder)
+	fol			= len([name for name in os.listdir(parent_dir+"/"+folder) if os.path.isfile(name)])
 	dim_time 		= 24
 	dim_alt 		= 41
         print("Las dimensiones de la precipitacion son (time,lat,lon):")
@@ -92,7 +129,6 @@ def get_global_variables(parent_dir,folders,folder,out_dir):
         nc_new.createDimension('south_north',dim_lat)
         nc_new.createDimension('west_east',dim_lon)
         nc_new.createDimension('time',dim_time)
-        nc_new.createDimension('bottom_top',dim_alt)
 
         latitude        = nc_new.createVariable('XLAT','f4',('time','south_north','west_east'))
         longitude       = nc_new.createVariable('XLONG','f4',('time','south_north','west_east'))
@@ -100,13 +136,26 @@ def get_global_variables(parent_dir,folders,folder,out_dir):
         rainc           = nc_new.createVariable('RAINC','f4',('time','south_north','west_east'))
 	rainnc		= nc_new.createVariable('RAINNC','f4',('time','south_north','west_east'))
 	date		= nc_new.createVariable('DATE',str,'time')
+	timestamp	= nc_new.createVariable('TIMESTAMP','f4','time')
 
-	Qvapor		= nc_new.createVariable('QVAPOR','f4',('time','bottom_top','south_north','west_east'))
-	Qcloud		= nc_new.createVariable('QCLOUD','f4',('time','bottom_top','south_north','west_east'))
-	Qrain		= nc_new.createVariable('QRAIN','f4',('time','bottom_top','south_north','west_east'))
-        Qice	        = nc_new.createVariable('QICE','f4',('time','bottom_top','south_north','west_east'))
-        Qsnow           = nc_new.createVariable('QSNOW','f4',('time','bottom_top','south_north','west_east'))
-        Qgraup          = nc_new.createVariable('QGRAUP','f4',('time','bottom_top','south_north','west_east'))
+	Qvapor_500	= nc_new.createVariable('QVAPOR_500','f4',('time','south_north','west_east'))
+	Qvapor_700      = nc_new.createVariable('QVAPOR_700','f4',('time','south_north','west_east'))
+	Qvapor_850      = nc_new.createVariable('QVAPOR_850','f4',('time','south_north','west_east'))
+	Qcloud_500      = nc_new.createVariable('QCLOUD_500','f4',('time','south_north','west_east'))
+	Qcloud_700      = nc_new.createVariable('QCLOUD_700','f4',('time','south_north','west_east'))
+	Qcloud_850      = nc_new.createVariable('QCLOUD_850','f4',('time','south_north','west_east'))
+	Qrain_500      	= nc_new.createVariable('QRAIN_500','f4',('time','south_north','west_east'))
+	Qrain_700      	= nc_new.createVariable('QRAIN_700','f4',('time','south_north','west_east'))
+	Qrain_850      	= nc_new.createVariable('QRAIN_850','f4',('time','south_north','west_east'))
+	Qice_500	= nc_new.createVariable('QICE_500','f4',('time','south_north','west_east'))
+	Qice_700        = nc_new.createVariable('QICE_700','f4',('time','south_north','west_east'))
+	Qice_850        = nc_new.createVariable('QICE_850','f4',('time','south_north','west_east'))
+	Qsnow_500       = nc_new.createVariable('QSNOW_500','f4',('time','south_north','west_east'))
+	Qsnow_700       = nc_new.createVariable('QSNOW_700','f4',('time','south_north','west_east'))
+	Qsnow_850       = nc_new.createVariable('QSNOW_850','f4',('time','south_north','west_east'))
+	Qgraup_500      = nc_new.createVariable('QGRAUP_500','f4',('time','south_north','west_east'))
+	Qgraup_700      = nc_new.createVariable('QGRAUP_700','f4',('time','south_north','west_east'))
+	Qgraup_850      = nc_new.createVariable('QGRAUP_850','f4',('time','south_north','west_east'))
 
 	T_500		= nc_new.createVariable('T_500','f4',('time','south_north','west_east'))
 	T_700		= nc_new.createVariable('T_700','f4',('time','south_north','west_east'))
@@ -123,8 +172,9 @@ def get_global_variables(parent_dir,folders,folder,out_dir):
 		print(nc_file)
 		nc_file 	= netCDF4.Dataset(parent_dir + "/" + folder + "/" + nc_file, 'r', format='NETCDF4')
 		print(i)
-		date[i],latitude[i,:,:],longitude[i,:,:],height[i,:,:],rainc[i,:,:],rainnc[i,:,:],Qvapor[i,:,:,:],Qcloud[i,:,:,:],Qrain[i,:,:,:],Qice[i,:,:,:],Qsnow[i,:,:,:],Qgraup[i,:,:,:]	= get_variables(nc_file)
+		date[i],timestamp[i],latitude[i,:,:],longitude[i,:,:],height[i,:,:],rainc[i,:,:],rainnc[i,:,:] = get_variables(nc_file)
 		T_500[i,:,:],T_700[i,:,:],T_850[i,:,:] = get_temperature(nc_file)
+		Qvapor_500[i,:,:],Qvapor_700[i,:,:],Qvapor_850[i,:,:],Qcloud_500[i,:,:],Qcloud_700[i,:,:],Qcloud_850[i,:,:],Qrain_500[i,:,:],Qrain_700[i,:,:],Qrain_850[i,:,:],Qice_500[i,:,:],Qice_700[i,:,:],Qice_850[i,:,:],Qsnow_500[i,:,:],Qsnow_700[i,:,:],Qsnow_850[i,:,:],Qgraup_500[i,:,:],Qgraup_700[i,:,:],Qgraup_850[i,:,:] = get_razon_de_mezcla(nc_file)
 
         nc_new.close()
 
