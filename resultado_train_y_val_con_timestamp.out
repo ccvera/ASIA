@@ -1,0 +1,70 @@
+[2020-05-14 17:38:23,561] DEBUG: Training KNN classifier...
+Duration: 0:06:30.906111
+[2020-05-14 17:48:44,008] DEBUG: Score for KNN model: 0.907031 
+----
+[2020-05-14 17:48:44,009] DEBUG: Training DecisionTree classifier...
+Duration: 0:01:40.443641
+[2020-05-14 17:50:24,912] DEBUG: Score for DecisionTree model: 0.806752 
+----
+[2020-05-14 17:50:24,913] DEBUG: Training RandomForest classifier...
+Duration: 0:01:04.006349
+[2020-05-14 17:51:30,236] DEBUG: Score for RandomForest model: 0.689619 
+----
+[2020-05-14 17:51:30,237] DEBUG: Training NeuralNetwork classifier...
+Duration: 0:39:02.773443
+[2020-05-14 18:30:38,572] DEBUG: Score for NeuralNetwork model: 0.659497 
+----
+[2020-05-14 18:30:38,573] DEBUG: Training AdaBoost classifier...
+Duration: 0:14:19.756200
+[2020-05-14 18:45:15,330] DEBUG: Score for AdaBoost model: 0.818882 
+----
+[2020-05-14 18:45:15,348] DEBUG: Training NaiveBayes classifier...
+Duration: 0:00:05.383957
+[2020-05-14 18:45:25,461] DEBUG: Score for NaiveBayes model: 0.659119 
+----
+[2020-05-14 18:45:25,462] DEBUG: Training QDA classifier...
+Duration: 0:00:43.103603
+[2020-05-14 18:46:10,759] DEBUG: Score for QDA model: 0.698079 
+----
+[2020-05-14 18:46:10,760] DEBUG: Training LoR classifier...
+Duration: 0:00:15.225073
+[2020-05-14 18:46:26,298] DEBUG: Score for LoR model: 0.659497 
+----
+[2020-05-14 18:46:26,299] DEBUG: Training SGD classifier...
+Duration: 0:00:20.175355
+[2020-05-14 18:46:46,775] DEBUG: Score for SGD model: 0.340503 
+----
+[2020-05-14 18:46:46,776] DEBUG: Training LDA classifier...
+Duration: 0:01:02.390596
+[2020-05-14 18:47:49,470] DEBUG: Score for LDA model: 0.739494 
+----
+[2020-05-14 18:47:49,471] DEBUG: Training MLP classifier...
+Duration: 0:20:56.202562
+[2020-05-14 19:08:50,972] DEBUG: Score for MLP model: 0.659497 
+----
+[2020-05-14 19:08:50,973] DEBUG: Training SVM classifier...
+Duration: 0:48:42.941176
+[2020-05-14 19:57:35,370] DEBUG: Score for SVM model: 0.659497 
+----
+[2020-05-14 19:57:35,371] DEBUG: Training OVR classifier...
+Duration: 0:48:22.199328
+[2020-05-14 20:45:57,981] DEBUG: Score for OVR model: 0.659497 
+----
+[2020-05-14 20:45:57,983] DEBUG: Training MBKM classifier...
+Duration: 0:00:28.839949
+[2020-05-14 20:46:27,471] DEBUG: Score for MBKM model: -825438302475766272.000000 
+----
+[2020-05-14 20:46:32,539] DEBUG: Score VALIDATION for NaiveBayes.pkl model: 0.679520
+[2020-05-14 20:46:32,617] DEBUG: Score VALIDATION for LoR.pkl model: 0.727900
+[2020-05-14 20:46:34,056] DEBUG: Score VALIDATION for MLP.pkl model: 0.727900
+[2020-05-14 20:46:36,991] DEBUG: Score VALIDATION for AdaBoost.pkl model: 0.636246
+[2020-05-14 20:46:37,339] DEBUG: Score VALIDATION for QDA.pkl model: 0.770871
+[2020-05-14 20:46:38,646] DEBUG: Score VALIDATION for NeuralNetwork.pkl model: 0.727900
+[2020-05-14 20:46:38,738] DEBUG: Score VALIDATION for DecisionTree.pkl model: 0.685017
+[2020-05-14 20:46:38,800] DEBUG: Score VALIDATION for SVM.pkl model: 0.727900
+[2020-05-14 20:46:38,862] DEBUG: Score VALIDATION for OVR.pkl model: 0.727900
+[2020-05-14 20:46:39,139] DEBUG: Score VALIDATION for RandomForest.pkl model: 0.738346
+[2020-05-14 20:46:39,264] DEBUG: Score VALIDATION for SGD.pkl model: 0.272100
+[2020-05-14 20:48:33,809] DEBUG: Score VALIDATION for KNN.pkl model: 0.676860
+[2020-05-14 20:48:33,923] DEBUG: Score VALIDATION for LDA.pkl model: 0.718519
+[2020-05-14 20:48:36,051] DEBUG: Score VALIDATION for MBKM.pkl model: 0.185267
