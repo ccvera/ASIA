@@ -2,7 +2,7 @@
 
 Para filtrar las salidas del WRF y obtener únicamente las variables que necesitamos:
 ```
- python 1_preprocess_daily.py -D <data_dir> -O <output_nc_dir>
+ python 1_preprocess_daily.py -D <raw_data_dir> -O <output_nc_dir>
 ```
 
 Para convertir nuetro .nc filtrado en un .csv:
