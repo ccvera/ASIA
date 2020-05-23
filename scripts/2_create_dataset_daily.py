@@ -90,6 +90,9 @@ def create_csv(nc_filtrado,in_dir,out_dir,gt_file):
 	t_700_serie     = pd.Series(t_700_x,name='T_700hPa')
 	t_850_serie     = pd.Series(t_850_x,name='T_850hPa')
 
+	precip_wrf_serie = rainc_serie.add(rainnc_serie)
+	precip_wrf_serie = precip_wrf_serie.rename("PRECIPITACION_WRF")
+
 	qvapor_500_serie	= pd.Series(qvapor_500_x,name='QVAPOR_500')
 	qvapor_700_serie        = pd.Series(qvapor_700_x,name='QVAPOR_700')
 	qvapor_850_serie        = pd.Series(qvapor_850_x,name='QVAPOR_850')
@@ -126,11 +129,47 @@ def create_csv(nc_filtrado,in_dir,out_dir,gt_file):
 	precip_x	= precip.flatten()
 	precip_serie	= pd.Series(precip_x,name='PRECIPITACION')
 	precip_serie    = pd.concat([precip_serie]*repeat_precip, axis=0).reset_index(drop=True)
-	
+
+	# Binaria CHE	
 	sintetica_x     = np.where(precip_x>0, 1, 0)
 	sintetica_serie	= pd.Series(sintetica_x,name='LLUVIA')
 	sintetica_serie = pd.concat([sintetica_serie]*repeat_precip, axis=0).reset_index(drop=True)
+
+	# Binaria WRF
+        sintetica_wrf_x     = np.where(precip_wrf_serie>0, 1, 0)
+        sintetica_wrf_serie = pd.Series(sintetica_wrf_x,name='LLUVIA_WRF')
+        sintetica_wrf_serie = pd.concat([sintetica_wrf_serie]*repeat_precip, axis=0).reset_index(drop=True)
 	
+	# Rangos disponibles: 0.1,1.,1.5,2.5,5.,10.,15.,20.,25.,30.,40.,50.,80.
+	# Valores: 1,2,3,4,5,6,7,8,9,10,11,12,13
+
+	conditions  	= [precip_x<=0,\
+			(precip_x>0)&(precip_x<0.1),\
+			(precip_x>=0.1)&(precip_x<1),\
+                        (precip_x>=1)&(precip_x<1.5),\
+                        (precip_x>=1.5)&(precip_x<2.5),\
+                        (precip_x>=2.5)&(precip_x<5),\
+                        (precip_x>=5)&(precip_x<10),\
+                        (precip_x>=10)&(precip_x<15),\
+                        (precip_x>=15)&(precip_x<20),\
+                        (precip_x>=20)&(precip_x<25),\
+                        (precip_x>=25)&(precip_x<30),\
+                        (precip_x>=30)&(precip_x<40),\
+                        (precip_x>=40)&(precip_x<50),\
+                        (precip_x>=50)&(precip_x<80),\
+                        (precip_x>=80)]
+	choices     	= [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+	
+	# Rangos de la CHE
+	rango_x		= np.select(conditions, choices, default='zero') 
+	rango_serie	= pd.Series(rango_x,name='RANGO')
+	rango_serie	= pd.concat([rango_serie]*repeat_precip, axis=0).reset_index(drop=True)
+
+	# Rangos de las predicciones
+	rango_wrf_x         = np.select(conditions, choices, default='zero')
+        rango_wrf_serie     = pd.Series(rango_wrf_x,name='RANGO_WRF')
+        rango_wrf_serie     = pd.concat([rango_wrf_serie]*repeat_precip, axis=0).reset_index(drop=True)
+
 	time_serie      = pd.Series(time_x,name='DATE').repeat(repeat_date).reset_index(drop=True)
 	tmstamp_serie	= pd.Series(timestamp_x,name='TIMESTAMP').repeat(repeat_date).reset_index(drop=True)
 	lat_serie	= pd.concat([lat_serie], axis=0).reset_index(drop=True)
@@ -140,7 +179,7 @@ def create_csv(nc_filtrado,in_dir,out_dir,gt_file):
 	coordenadas	= pd.concat([lat_serie,lon_serie,hei_serie], axis=1)
 	
 	#final_serie	= pd.concat([time_serie,coordenadas,precip_serie,sintetica_serie], axis=1)
-	final_serie     = pd.concat([time_serie,tmstamp_serie,coordenadas,rainc_serie,rainnc_serie,t_500_serie,t_700_serie,t_850_serie,qvapor_500_serie,qvapor_700_serie,qvapor_850_serie,qcloud_500_serie,qcloud_700_serie,qcloud_850_serie,qrain_500_serie,qrain_700_serie,qrain_850_serie,qice_500_serie,qice_700_serie,qice_850_serie,qsnow_500_serie,qsnow_700_serie,qsnow_850_serie,qgraup_500_serie,qgraup_700_serie,qgraup_850_serie,precip_serie,sintetica_serie], axis=1)
+	final_serie     = pd.concat([time_serie,tmstamp_serie,coordenadas,rainc_serie,rainnc_serie,t_500_serie,t_700_serie,t_850_serie,qvapor_500_serie,qvapor_700_serie,qvapor_850_serie,qcloud_500_serie,qcloud_700_serie,qcloud_850_serie,qrain_500_serie,qrain_700_serie,qrain_850_serie,qice_500_serie,qice_700_serie,qice_850_serie,qsnow_500_serie,qsnow_700_serie,qsnow_850_serie,qgraup_500_serie,qgraup_700_serie,qgraup_850_serie,precip_wrf_serie,precip_serie,sintetica_wrf_serie,sintetica_serie,rango_wrf_serie,rango_serie], axis=1)
 	#final_serie     = pd.concat([coordenadas,sintetica_serie], axis=1)
 
 
