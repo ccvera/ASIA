@@ -25,7 +25,7 @@ from optparse import OptionParser, Values
 from wrf import getvar, interplevel
 
 def create_nc_var():
-	
+	pass	
 
 # Leemos las variables de nuestro nc fuente	
 def get_nc_var(nc, var):
@@ -40,9 +40,50 @@ def create_nc(parent_dir, folders, folder, out_dir):
 	new_vars_name	= ['DATE', 'TIMESTAMP', 'XLAT', 'XLONG', 'HGT', 'RAINC', 'RAINNC', 'QVAPOR_500', 'QVAPOR_700', 'QVAPOR_850', 'QCLOUD_500', 'QCLOUD_700', 'QCLOUD_850', 'QRAIN_500', 'QRAIN_700', 'QRAIN_850', 'QICE_500', 'QICE_700', 'QICE_850', 'QSNOW_500', 'QSNOW_700', 'QSNOW_850', 'QGRAUP_500', 'QGRAUP_700', 'QGRAUP_850', 'T_500', 'T_700', 'T_850']
 
 	# Obtenemos las variables importantes
-	files = os.listdir(parent_dir + "/" + folder)
-	files.sort()
+        files = os.listdir(parent_dir + "/" + folder)
+        files.sort()
+
+	# Creamos el nuevo nc
+	f = parent_dir + "/" + folder + "/" + files[0]
+	# Leemos el primer fichero nc dentro del directorio "ncfiles" (asumimos que todos son del mismo dominio)
+        nc      = netCDF4.Dataset(f, 'r', format='NETCDF4')
+	time    = nc.variables['XTIME']
+
+        # Creamos las series de cada una de las variables
+        dtime           = netCDF4.num2date(time[:],time.units)
+        str_time        = [i.strftime("%Y-%m-%d") for i in dtime]
+
+	nc_new  = netCDF4.Dataset(out_dir + "/" + str_time[0] + '.nc','w')
 	
+	# Dimensiones
+	# Definimos las dimensiones que tendran las distintas variables
+	dim_lat 	= 78
+	dim_lon 	= 123
+	dim_time	= 24
+        nc_new.createDimension('south_north',dim_lat)
+        nc_new.createDimension('west_east',dim_lon)
+        nc_new.createDimension('time',dim_time)
+
+	for i,v in enumerate(new_vars):
+		if v == 'date':
+			v = nc_new.createVariable(new_vars_name[i],str,'time')	
+		elif v == 'timestamp':
+			v = nc_new.createVariable(new_vars_name[i],'f4','time')
+		else:
+			v = nc_new.createVariable(new_vars_name[i],'f4',('time','south_north','west_east'))
+
+	for j,nc_file in enumerate(files):
+		nc_file         = netCDF4.Dataset(parent_dir + "/" + folder + "/" + nc_file, 'r', format='NETCDF4')
+		        for i,v in enumerate(new_vars):
+		                if v == 'date':
+					print j
+		                elif v == 'timestamp':
+					print j
+		                else:
+					print j
+
+	logger.info('File %s.nc created', str_time[0])
+	nc_new.close()
 	
 
 def filter_nc(parent_dir, out_dir):
@@ -50,6 +91,7 @@ def filter_nc(parent_dir, out_dir):
 	folders.sort()
 	logger.info('RAW data directory: %s', parent_dir)
 
+	# Para cada directorio diario se crea un .nc
 	for i in folders:
 		create_nc(parent_dir,folders,i,out_dir)
 
