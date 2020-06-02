@@ -11,7 +11,7 @@ console.setFormatter(formatter)
 logging.getLogger('RaP').addHandler(console)
 logger = logging.getLogger(__name__)
 
-logger.info('Started filtering variables')
+logger.info('Started creating_csv.py')
 
 import os
 import netCDF4
@@ -26,6 +26,7 @@ from wrf import getvar, interplevel
 
 def clean(final_serie,nc_filtrado):
 
+	logger.info('Cleaning .csv file. Drop empty values and specific hours')
 	final_serie.drop(final_serie.columns[0],axis=1,inplace=True)
 	# Eliminamos las filas para las que no tenemos los valores de la precip real
         print(final_serie.dropna(inplace=True))
@@ -56,6 +57,7 @@ def clean(final_serie,nc_filtrado):
 	return final_serie.drop(index)
 
 def get_conditions(var):
+	logger.debug('Get conditions to create "RANGO"')
         conditions      = [var<=0,\
                         (var>0)&(var<0.1),\
                         (var>=0.1)&(var<1),\
@@ -78,39 +80,38 @@ def get_conditions(var):
 
 def create_csv(nc_filtrado,in_dir,out_dir,gt_file):
 
+	logger.info('Creating .csv file')
+
         filtrado        = netCDF4.Dataset(in_dir + "/" + nc_filtrado, 'r')
         verdad_terreno  = netCDF4.Dataset(gt_file, 'r')
 
 	nc_vars_name	= ['DATE', 'TIMESTAMP', 'XLAT', 'XLONG', 'HGT', 'RAINC', 'RAINNC', 'QVAPOR_500', 'QVAPOR_700', 'QVAPOR_850', 'QCLOUD_500', 'QCLOUD_700', 'QCLOUD_850', 'QRAIN_500', 'QRAIN_700', 'QRAIN_850', 'QICE_500', 'QICE_700', 'QICE_850', 'QSNOW_500', 'QSNOW_700', 'QSNOW_850', 'QGRAUP_500', 'QGRAUP_700', 'QGRAUP_850', 'T_500', 'T_700', 'T_850']
-	csv_vars_name	= ['time', 'timestamp', 'lat', 'lon', 'hei', 'rainc', 'rainnc', 'qvapor_500', 'qvapor_700', 'qvapor_850', 'qcloud_500', 'qcloud_700', 'qcloud_850', 'qrain_500', 'qrain_700', 'qrain_850', 'qice_500', 'qice_700', 'qice_850', 'qsnow_500', 'qsnow_700', 'qsnow_850', 'qgraup_500', 'qgraup_700', 'qgraup_850', 't_500', 't_700', 't_850']
-	coordenadas	= ['time', 'timestamp', 'lat', 'lon', 'hei']
+	pd_vars_name	= ['time', 'timestamp', 'lat', 'lon', 'hei', 'rainc', 'rainnc', 'qvapor_500', 'qvapor_700', 'qvapor_850', 'qcloud_500', 'qcloud_700', 'qcloud_850', 'qrain_500', 'qrain_700', 'qrain_850', 'qice_500', 'qice_700', 'qice_850', 'qsnow_500', 'qsnow_700', 'qsnow_850', 'qgraup_500', 'qgraup_700', 'qgraup_850', 't_500', 't_700', 't_850']
+	date		= ['time', 'timestamp']
 
 	final = pd.Series() 	
-	for i,v in enumerate(csv_vars_name):
+	lat = filtrado.variables['XLAT'][:]
+	repeat_date     = lat.shape[1]*lat.shape[2]
+
+	for i,v in enumerate(pd_vars_name):
 		v 	= filtrado.variables[nc_vars_name[i]][:]
-		if  csv_vars_name[i] == 'lat':
-                        repeat_date     = v.shape[1]*v.shape[2]
-                        print repeat_date
-
-		v_x 	= csv_vars_name[i] + '_x'
+		v_x 	= pd_vars_name[i] + '_x'
 		v_x 	= v.flatten()
-		v_serie	= csv_vars_name[i] + '_serie'
+		v_serie	= pd_vars_name[i] + '_serie'
 		v_serie	= pd.Series(v_x,name=nc_vars_name[i])
-
 		# Agnadimos las variables procesadas
-		if csv_vars_name[i] in coordenadas:
-			v_serie = pd.concat([v_serie], axis=0).reset_index(drop=True)	
-
+		if pd_vars_name[i] in date:
+			v_serie = pd.concat([v_serie], axis=0).repeat(repeat_date).reset_index(drop=True)	
 		final	= pd.concat([final,v_serie], axis=1)
 
+	logger.info('All variables obteined')
 	# Obtenemos el rango de fechas que queremos de la verdad terreno
 	i_date          = dt.date(2008,1,1)
         f_date          = dt.date(int(nc_filtrado[0:4]),int(nc_filtrado[5:7]),int(nc_filtrado[8:10]))
 	inicio          = (f_date - i_date).days
 	fin             = inicio + 1
 	
-	#precip          = verdad_terreno.variables['precip'][inicio:fin,:,:]
-	precip          = verdad_terreno.variables['XLAT'][inicio:fin,:,:]
+	precip          = verdad_terreno.variables['precip'][inicio:fin,:,:]
 
 	# Obtenemos la precipitacion para el WRF
 	precip_wrf_serie = final['RAINC'].add(final['RAINNC'])
@@ -135,7 +136,7 @@ def create_csv(nc_filtrado,in_dir,out_dir,gt_file):
         sintetica_serie = pd.concat([sintetica_serie]*repeat_precip, axis=0).reset_index(drop=True)
 
 	# Obtenemos los rangos para el WRF
-	conditions,choices      = get_conditions(precip_wrf_serie)
+	conditions,choices  = get_conditions(precip_wrf_serie)
 	rango_wrf_x         = np.select(conditions, choices, default='zero')
         rango_wrf_serie     = pd.Series(rango_wrf_x,name='RANGO_WRF')
         rango_wrf_serie     = pd.concat([rango_wrf_serie]*repeat_precip, axis=0).reset_index(drop=True)
@@ -155,7 +156,7 @@ def create_csv(nc_filtrado,in_dir,out_dir,gt_file):
 	# Almacenamos en un csv
         csv_name        = nc_filtrado[0:10]
 	final.to_csv(out_dir + "/" + csv_name + '.csv',index=False,header=True, float_format='%.8f')
-
+	logger.info('%s.csv created', csv_name)
 	
 def create_csv_files(in_dir,out_dir,gt_file):
         files = os.listdir(in_dir)
