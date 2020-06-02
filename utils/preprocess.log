@@ -3,3 +3,21 @@
 2020-06-02 13:16:49,040: INFO - All variables obteined
 2020-06-02 13:16:50,485: INFO - Cleaning .csv file. Drop empty values and specific hours
 2020-06-02 13:16:56,506: INFO - 2015-02-02.csv created
+2020-06-02 14:39:32,398: INFO - Started filtering variables
+2020-06-02 14:40:03,826: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-02 14:41:56,943: INFO - Started filtering variables
+2020-06-02 14:41:59,085: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-02 14:42:22,530: INFO - Started filtering variables
+2020-06-02 14:42:24,612: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-02 14:42:54,722: INFO - Started filtering variables
+2020-06-02 14:42:56,813: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-02 14:43:25,221: INFO - Started filtering variables
+2020-06-02 14:43:27,375: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-02 14:43:52,931: INFO - Started filtering variables
+2020-06-02 14:43:55,011: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-02 14:47:10,961: INFO - Started filtering variables
+2020-06-02 14:47:13,096: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-02 14:48:25,613: INFO - Started filtering variables
+2020-06-02 14:48:27,690: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-02 15:02:34,551: INFO - Started filtering variables
+2020-06-02 15:02:36,642: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw

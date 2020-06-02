@@ -27,6 +27,16 @@ from wrf import getvar, interplevel
 def create_nc_var():
 	pass	
 
+def get_date(nc):
+	time = nc.variables['XTIME']
+
+	dtime           = netCDF4.num2date(time[:],time.units)
+        str_time        = [i.strftime("%Y-%m-%d[%H:%M:%S]") for i in dtime]
+
+	# Convertimos la lista a un string para que lo acepte netCDF
+        str1 = " "
+	return str1.join(str_time)
+	
 # Leemos las variables de nuestro nc fuente	
 def get_nc_var(nc, var):
 	return getvar(nc, var)
@@ -63,7 +73,7 @@ def create_nc(parent_dir, folders, folder, out_dir):
         nc_new.createDimension('south_north',dim_lat)
         nc_new.createDimension('west_east',dim_lon)
         nc_new.createDimension('time',dim_time)
-
+	'''
 	for i,v in enumerate(new_vars):
 		if v == 'date':
 			v = nc_new.createVariable(new_vars_name[i],str,'time')	
@@ -75,12 +85,18 @@ def create_nc(parent_dir, folders, folder, out_dir):
 	for j,nc_file in enumerate(files):
 		nc_file         = netCDF4.Dataset(parent_dir + "/" + folder + "/" + nc_file, 'r', format='NETCDF4')
 		        for i,v in enumerate(new_vars):
-		                if v == 'date':
-					print j
-		                elif v == 'timestamp':
-					print j
-		                else:
-					print j
+				pass
+	'''
+	for j,nc_file in enumerate(files):
+		for i,v in enumerate(new_vars):
+			if v == 'date':
+                        	v = nc_new.createVariable(new_vars_name[i],str,'time')
+				#v[j] = get_date(nc)
+                	#elif v == 'timestamp':
+                        #	v = nc_new.createVariable(new_vars_name[i],'f4','time')
+                	#else:
+                        #	v = nc_new.createVariable(new_vars_name[i],'f4',('time','south_north','west_east'))
+
 
 	logger.info('File %s.nc created', str_time[0])
 	nc_new.close()
