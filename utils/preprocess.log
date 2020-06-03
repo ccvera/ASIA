@@ -21,3 +21,129 @@
 2020-06-02 14:48:27,690: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
 2020-06-02 15:02:34,551: INFO - Started filtering variables
 2020-06-02 15:02:36,642: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 08:53:19,636: INFO - Started filtering variables
+2020-06-03 08:54:27,013: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 08:55:17,446: INFO - Started filtering variables
+2020-06-03 08:55:19,687: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 08:56:27,771: INFO - Started filtering variables
+2020-06-03 08:56:30,048: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 08:56:57,693: INFO - Started filtering variables
+2020-06-03 08:57:00,024: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 08:57:00,063: INFO - File 2015-02-02.nc created
+2020-06-03 08:57:01,470: INFO - File 2015-02-03.nc created
+2020-06-03 08:58:00,199: INFO - Started filtering variables
+2020-06-03 08:58:02,481: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 08:58:02,520: INFO - File 2015-02-02.nc created
+2020-06-03 08:58:02,562: INFO - File 2015-02-03.nc created
+2020-06-03 09:00:20,911: INFO - Started filtering variables
+2020-06-03 09:00:23,282: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:00:28,053: INFO - File 2015-02-02.nc created
+2020-06-03 09:00:34,419: INFO - File 2015-02-03.nc created
+2020-06-03 09:03:14,491: INFO - Started filtering variables
+2020-06-03 09:03:16,827: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:03:19,614: INFO - File 2015-02-02.nc created
+2020-06-03 09:04:40,106: INFO - Started filtering variables
+2020-06-03 09:04:42,384: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:04:43,938: INFO - File 2015-02-02.nc created
+2020-06-03 09:04:45,648: INFO - File 2015-02-03.nc created
+2020-06-03 09:17:30,917: INFO - Started filtering variables
+2020-06-03 09:17:33,262: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:23:48,284: INFO - Started filtering variables
+2020-06-03 09:23:50,786: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:25:09,257: INFO - Started filtering variables
+2020-06-03 09:25:11,534: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:25:29,369: INFO - Started filtering variables
+2020-06-03 09:25:31,672: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:26:23,268: INFO - Started filtering variables
+2020-06-03 09:26:25,533: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:26:55,788: INFO - Started filtering variables
+2020-06-03 09:26:58,063: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:26:58,928: INFO - File 2015-02-02.nc created
+2020-06-03 09:26:59,898: INFO - File 2015-02-03.nc created
+2020-06-03 09:27:50,462: INFO - Started filtering variables
+2020-06-03 09:27:52,706: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:28:51,740: INFO - Started filtering variables
+2020-06-03 09:28:54,051: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:57:22,287: INFO - Started filtering variables
+2020-06-03 09:57:24,638: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:58:07,202: INFO - Started filtering variables
+2020-06-03 09:58:09,486: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:59:08,754: INFO - Started filtering variables
+2020-06-03 09:59:11,082: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 09:59:11,932: INFO - File 2015-02-02.nc created
+2020-06-03 09:59:12,909: INFO - File 2015-02-03.nc created
+2020-06-03 10:00:03,333: INFO - Started filtering variables
+2020-06-03 10:00:05,436: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 10:00:46,233: INFO - Started filtering variables
+2020-06-03 10:00:48,611: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 10:01:00,925: INFO - Started filtering variables
+2020-06-03 10:01:03,182: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 13:58:35,002: INFO - Started filtering variables
+2020-06-03 13:59:08,341: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:00:06,640: INFO - Started filtering variables
+2020-06-03 14:00:08,978: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:01:24,313: INFO - Started filtering variables
+2020-06-03 14:01:26,559: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:01:31,925: INFO - File 2015-02-02.nc created
+2020-06-03 14:01:36,769: INFO - File 2015-02-03.nc created
+2020-06-03 14:03:00,286: INFO - Started filtering variables
+2020-06-03 14:03:02,594: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:03:03,537: INFO - File 2015-02-02.nc created
+2020-06-03 14:03:04,587: INFO - File 2015-02-03.nc created
+2020-06-03 14:15:06,440: INFO - Started filtering variables
+2020-06-03 14:15:08,777: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:15:08,817: INFO - File 2015-02-02.nc created
+2020-06-03 14:15:08,891: INFO - File 2015-02-03.nc created
+2020-06-03 14:15:38,130: INFO - Started filtering variables
+2020-06-03 14:15:40,344: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:15:40,383: INFO - File 2015-02-02.nc created
+2020-06-03 14:15:40,430: INFO - File 2015-02-03.nc created
+2020-06-03 14:19:47,811: INFO - Started filtering variables
+2020-06-03 14:19:50,104: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:21:27,575: INFO - Started filtering variables
+2020-06-03 14:21:29,833: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:22:08,965: INFO - Started filtering variables
+2020-06-03 14:22:11,261: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:22:12,171: INFO - File 2015-02-02.nc created
+2020-06-03 14:22:13,180: INFO - File 2015-02-03.nc created
+2020-06-03 14:27:11,924: INFO - Started filtering variables
+2020-06-03 14:27:14,175: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:27:58,642: INFO - Started filtering variables
+2020-06-03 14:28:00,893: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:28:02,662: INFO - File 2015-02-02.nc created
+2020-06-03 14:28:04,627: INFO - File 2015-02-03.nc created
+2020-06-03 14:29:54,258: INFO - Started filtering variables
+2020-06-03 14:29:56,556: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:29:58,338: INFO - File 2015-02-02.nc created
+2020-06-03 14:30:00,394: INFO - File 2015-02-03.nc created
+2020-06-03 14:30:26,903: INFO - Started filtering variables
+2020-06-03 14:30:29,142: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:30:30,926: INFO - File 2015-02-02.nc created
+2020-06-03 14:30:32,886: INFO - File 2015-02-03.nc created
+2020-06-03 14:31:36,416: INFO - Started filtering variables
+2020-06-03 14:31:38,689: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:31:40,971: INFO - File 2015-02-02.nc created
+2020-06-03 14:31:42,931: INFO - File 2015-02-03.nc created
+2020-06-03 14:32:44,482: INFO - Started filtering variables
+2020-06-03 14:32:46,716: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:32:48,500: INFO - File 2015-02-02.nc created
+2020-06-03 14:32:50,492: INFO - File 2015-02-03.nc created
+2020-06-03 14:35:11,308: INFO - Started filtering variables
+2020-06-03 14:35:55,984: INFO - Started filtering variables
+2020-06-03 14:35:58,270: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:36:00,057: INFO - File 2015-02-02.nc created
+2020-06-03 14:36:02,029: INFO - File 2015-02-03.nc created
+2020-06-03 14:39:20,868: INFO - Started filtering variables
+2020-06-03 14:39:23,156: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:39:31,373: INFO - File 2015-02-02.nc created
+2020-06-03 14:39:39,994: INFO - File 2015-02-03.nc created
+2020-06-03 14:42:19,755: INFO - Started filtering variables
+2020-06-03 14:42:22,070: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:43:51,737: INFO - Started filtering variables
+2020-06-03 14:43:53,924: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:43:55,702: INFO - File 2015-02-02.nc created
+2020-06-03 14:43:57,671: INFO - File 2015-02-03.nc created
+2020-06-03 14:45:40,375: INFO - Started filtering variables
+2020-06-03 14:45:42,672: INFO - RAW data directory: /home/fcsc/ccalvo/ML_meteo/data/raw
+2020-06-03 14:45:44,459: INFO - File 2015-02-02.nc created
+2020-06-03 14:45:46,433: INFO - File 2015-02-03.nc created

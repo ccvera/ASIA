@@ -25,24 +25,40 @@ from optparse import OptionParser, Values
 from wrf import getvar, interplevel
 
 def create_nc_var():
-	pass	
+	pass
 
-def get_date(nc):
+def set_coord_value(var, name, parent_dir, folder):
+	
+	nc         = netCDF4.Dataset(parent_dir + "/" + folder + "/" + name, 'r', format='NETCDF4')
+	return nc.variables[var][0,:,:]
+
+def set_date_value(name, parent_dir, folder, timestamp=False):
+
+	nc         = netCDF4.Dataset(parent_dir + "/" + folder + "/" + name, 'r', format='NETCDF4')
+
 	time = nc.variables['XTIME']
 
-	dtime           = netCDF4.num2date(time[:],time.units)
+        dtime           = netCDF4.num2date(time[:],time.units)
         str_time        = [i.strftime("%Y-%m-%d[%H:%M:%S]") for i in dtime]
 
-	# Convertimos la lista a un string para que lo acepte netCDF
+        # Convertimos la lista a un string para que lo acepte netCDF
         str1 = " "
-	return str1.join(str_time)
-	
+
+	str2 = ""
+        d = datetime.datetime.strptime(str2.join(str_time), "%Y-%m-%d[%H:%M:%S]")
+        tstamp = tm.mktime(d.timetuple())
+
+	if timestamp is True:
+		return tstamp
+	else:
+        	return str1.join(str_time)
+
 # Leemos las variables de nuestro nc fuente	
 def get_nc_var(nc, var):
 	return getvar(nc, var)
 
 def create_nc(parent_dir, folders, folder, out_dir):
-	coordinates 	= ['XLAT', 'XLONG', 'HGT', 'XTIME']
+	coordinates 	= ['XLAT', 'XLONG', 'HGT']
 	mixing_ratio	= ['QVAPOR', 'QCLOUD', 'QRAIN', 'QICE', 'QSNOW', 'QGRAUP']
 	precipitation 	= ['RAINC', 'RAINNC']
 
@@ -73,34 +89,48 @@ def create_nc(parent_dir, folders, folder, out_dir):
         nc_new.createDimension('south_north',dim_lat)
         nc_new.createDimension('west_east',dim_lon)
         nc_new.createDimension('time',dim_time)
-	'''
+	
 	for i,v in enumerate(new_vars):
 		if v == 'date':
 			v = nc_new.createVariable(new_vars_name[i],str,'time')	
+			for j in range(dim_time):
+				v[j] = set_date_value(files[j],parent_dir,folder)
 		elif v == 'timestamp':
 			v = nc_new.createVariable(new_vars_name[i],'f4','time')
+			for j in range(dim_time):
+				v[j] = set_date_value(files[j],parent_dir,folder,timestamp=True)
 		else:
 			v = nc_new.createVariable(new_vars_name[i],'f4',('time','south_north','west_east'))
+			for j in range(dim_time):
+				if new_vars_name[i] in (coordinates, precipitation):
+					v[j,:,:] = set_coord_value(new_vars_name[i],files[j],parent_dir,folder)
+				else:
+					print new_vars_name[i]
 
-	for j,nc_file in enumerate(files):
-		nc_file         = netCDF4.Dataset(parent_dir + "/" + folder + "/" + nc_file, 'r', format='NETCDF4')
-		        for i,v in enumerate(new_vars):
-				pass
 	'''
 	for j,nc_file in enumerate(files):
-		for i,v in enumerate(new_vars):
+		if j == 0:
+			nc_new		= netCDF4.Dataset(out_dir + "/" + str_time[0] + '.nc','w')
+			nc_new.createDimension('time',dim_time)
+		
+		nc_file         = netCDF4.Dataset(parent_dir + "/" + folder + "/" + nc_file, 'r', format='NETCDF4')
+		var = []
+	        for i,v in enumerate(new_vars):
 			if v == 'date':
-                        	v = nc_new.createVariable(new_vars_name[i],str,'time')
-				#v[j] = get_date(nc)
-                	#elif v == 'timestamp':
-                        #	v = nc_new.createVariable(new_vars_name[i],'f4','time')
-                	#else:
-                        #	v = nc_new.createVariable(new_vars_name[i],'f4',('time','south_north','west_east'))
-
-
+				if j == 0:
+					v = nc_new.createVariable(new_vars_name[i],str,'time')
+					var.append((new_vars_name[i],v))
+				#print var
+				v = var[i]
+				v[j] = "hola" #get_date(nc_file)			
+			else:
+				pass
+				# El problema uqe estoy teniendo es que despues de creado, "v" es una variable de new_vars. La solucion que se me ocurre es crear un "array" al que ir agnadiendo las variables del netcdf y luego cargarlas...
+	'''
+	###OPCION2
+	
 	logger.info('File %s.nc created', str_time[0])
 	nc_new.close()
-	
 
 def filter_nc(parent_dir, out_dir):
 	folders = os.listdir(parent_dir)
