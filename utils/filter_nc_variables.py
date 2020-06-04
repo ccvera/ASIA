@@ -107,28 +107,6 @@ def create_nc(parent_dir, folders, folder, out_dir):
 				else:
 					print new_vars_name[i]
 
-	'''
-	for j,nc_file in enumerate(files):
-		if j == 0:
-			nc_new		= netCDF4.Dataset(out_dir + "/" + str_time[0] + '.nc','w')
-			nc_new.createDimension('time',dim_time)
-		
-		nc_file         = netCDF4.Dataset(parent_dir + "/" + folder + "/" + nc_file, 'r', format='NETCDF4')
-		var = []
-	        for i,v in enumerate(new_vars):
-			if v == 'date':
-				if j == 0:
-					v = nc_new.createVariable(new_vars_name[i],str,'time')
-					var.append((new_vars_name[i],v))
-				#print var
-				v = var[i]
-				v[j] = "hola" #get_date(nc_file)			
-			else:
-				pass
-				# El problema uqe estoy teniendo es que despues de creado, "v" es una variable de new_vars. La solucion que se me ocurre es crear un "array" al que ir agnadiendo las variables del netcdf y luego cargarlas...
-	'''
-	###OPCION2
-	
 	logger.info('File %s.nc created', str_time[0])
 	nc_new.close()
 
