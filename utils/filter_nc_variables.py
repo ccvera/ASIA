@@ -27,6 +27,28 @@ from wrf import getvar, interplevel
 def create_nc_var():
 	pass
 
+def set_T_value(v, hpa, var, name, parent_dir, folder):
+
+	nc      = netCDF4.Dataset(parent_dir + "/" + folder + "/" + name, 'r', format='NETCDF4')
+	hPa     = getvar(nc, "pressure")
+	T	= getvar(nc, "temp", units="K")
+
+	tem	= interplevel(T, hPa, hpa + '.')
+
+	return tem[:,:]
+
+	
+def set_mixing_ratio_value(v, hpa, var, name, parent_dir, folder):
+
+	nc	= netCDF4.Dataset(parent_dir + "/" + folder + "/" + name, 'r', format='NETCDF4')
+
+	hPa     = getvar(nc, "pressure")
+	x	= getvar(nc,v)
+
+	mr	= interplevel(x, hPa, hpa + '.')
+
+	return mr
+	
 def set_coord_value(var, name, parent_dir, folder):
 	
 	nc         = netCDF4.Dataset(parent_dir + "/" + folder + "/" + name, 'r', format='NETCDF4')
@@ -105,7 +127,11 @@ def create_nc(parent_dir, folders, folder, out_dir):
 				if new_vars_name[i] in (coordinates, precipitation):
 					v[j,:,:] = set_coord_value(new_vars_name[i],files[j],parent_dir,folder)
 				else:
-					print new_vars_name[i]
+					var = new_vars_name[i]
+					if var[:-4] in mixing_ratio:
+						v[j,:,:] = set_mixing_ratio_value(var[:-4], var[-3:], new_vars_name[i],files[j],parent_dir,folder)
+					if var[:-4] == 'T':
+						v[j,:,:] = set_T_value(var[:-4], var[-3:], new_vars_name[i],files[j],parent_dir,folder)
 
 	logger.info('File %s.nc created', str_time[0])
 	nc_new.close()

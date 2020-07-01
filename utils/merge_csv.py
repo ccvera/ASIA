@@ -16,6 +16,7 @@ logger.info('Started creating merged csv...')
 import os, glob
 import numpy as np
 import pandas as pd
+import argparse
 
 def merge_csv(path, csv_name):
 	all_files	= glob.glob(os.path.join(path, "*.csv"))

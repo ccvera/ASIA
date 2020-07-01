@@ -55,6 +55,7 @@ def clean(final_serie,nc_filtrado):
                         (final_serie['DATE']== nc_filtrado[0:10] + '[22:00:00]') | \
                         (final_serie['DATE']== nc_filtrado[0:10] + '[23:00:00]')].index.values.astype(int)
 	return final_serie.drop(index)
+	#return final_serie
 
 def get_conditions(var):
 	logger.debug('Get conditions to create "RANGO"')
