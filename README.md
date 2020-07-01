@@ -9,12 +9,12 @@ Estructura del repositorio:
 - **reports**: contienen informes con los resultados obtenidos por la herramienta.
 - **utils**: conjunto de scripts para llevar a cabo el preprocesamiento de los datos.
 
-## Prerequisitos
+## Prerrequisitos
 - Python 2.7
 - wrf.python
 - scikit-learn
 
-## Preprocesamiento
+## Preprocesamiento dataset
 ```
 $ cd utils
 ```
