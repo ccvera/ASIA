@@ -57,6 +57,7 @@ def clean(final_serie,nc_filtrado):
 	return final_serie.drop(index)
 	#return final_serie
 
+'''
 def get_conditions(var):
 	logger.debug('Get conditions to create "RANGO"')
         conditions      = [var<=0,\
@@ -78,6 +79,17 @@ def get_conditions(var):
         choices         = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
 
 	return conditions,choices
+'''
+def get_conditions(var):
+        logger.debug('Get conditions to create "RANGO"')
+        conditions      = [var<0.1,\
+                        (var>=0.1)&(var<2.5),\
+                        (var>=2.5)&(var<5),\
+                        (var>=5)]
+
+        choices         = [ 0, 1, 2, 3 ]
+
+        return conditions,choices
 
 def create_csv(nc_filtrado,in_dir,out_dir,gt_file):
 

@@ -17,7 +17,7 @@ export LD_LIBRARY_PATH=/home/fcsc/ccalvo/test_GPUs/utils/python/2.7.12/lib:$LD_L
 export PYTHONPATH=/home/fcsc/ccalvo/test_GPUs/utils/python/2.7.12/lib/python2.7/site-packages
 
 # Train
-#python merge_csv.py -t /home/fcsc/ccalvo/METEO/csv_train
+python merge_csv.py -t /home/fcsc/ccalvo/METEO/csv_rangos_train
 
 # Validation
-python merge_csv.py -v /home/fcsc/ccalvo/METEO/csv_val
+#python merge_csv.py -v /home/fcsc/ccalvo/METEO/csv_rangos_val
