@@ -24,9 +24,6 @@ import argparse
 from optparse import OptionParser, Values
 from wrf import getvar, interplevel
 
-def create_nc_var():
-	pass
-
 def set_T_value(v, hpa, var, name, parent_dir, folder):
 
 	nc      = netCDF4.Dataset(parent_dir + "/" + folder + "/" + name, 'r', format='NETCDF4')

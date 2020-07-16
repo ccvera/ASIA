@@ -15,6 +15,7 @@ logger.info('Started creating_csv.py')
 
 import os
 import netCDF4
+import math
 import pandas as pd
 import numpy as np
 import time as tm
@@ -136,13 +137,11 @@ def create_csv(nc_filtrado,in_dir,out_dir,gt_file):
         precip_serie    = pd.Series(precip_x,name='PRECIPITACION')
         precip_serie    = pd.concat([precip_serie]*repeat_precip, axis=0).reset_index(drop=True)
 	
-
 	# Obtenemos la binaria para el WRF
 	sintetica_wrf_x     = np.where(precip_wrf_serie>0, 1, 0)
         sintetica_wrf_serie = pd.Series(sintetica_wrf_x,name='LLUVIA_WRF')
         sintetica_wrf_serie = pd.concat([sintetica_wrf_serie]*repeat_precip, axis=0).reset_index(drop=True)
 
-	
 	# Obtenemos la binaria para la CHE
 	sintetica_x     = np.where(precip_serie>0, 1, 0)
         sintetica_serie = pd.Series(sintetica_x,name='LLUVIA')
@@ -162,6 +161,19 @@ def create_csv(nc_filtrado,in_dir,out_dir,gt_file):
 
 	# Agnadimos las variables procesadas
 	final = pd.concat([final,precip_wrf_serie,precip_serie,sintetica_wrf_serie,sintetica_serie,rango_wrf_serie,rango_serie], axis=1)
+
+        # ECM para la binaria
+        ecm_sintetica_serie     = final['LLUVIA'].sub(final['LLUVIA_WRF'])
+	#ecm_sintetica_serie	= ecm_sintetica_serie.mul(ecm_sintetica_serie)
+        ecm_sintetica_serie     = ecm_sintetica_serie.rename("MSE_LLUVIA")
+
+        # ECM para el rango
+        ecm_rango_serie     = final['RANGO'].fillna(0).astype(int).sub(final['RANGO_WRF'].fillna(0).astype(int))
+        #ecm_rango_serie     = ecm_rango_serie.mul(ecm_rango_serie)
+        ecm_rango_serie     = ecm_rango_serie.rename("MSE_RANGO")
+
+	# Agnadimos el mse
+	final = pd.concat([final,ecm_sintetica_serie,ecm_rango_serie], axis=1)
 
 	# Limpiamos el dataframe
 	final = clean(final,nc_filtrado)
