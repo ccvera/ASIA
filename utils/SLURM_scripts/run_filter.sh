@@ -17,7 +17,10 @@ export LD_LIBRARY_PATH=/home/fcsc/ccalvo/test_GPUs/utils/python/2.7.12/lib:$LD_L
 export PYTHONPATH=/home/fcsc/ccalvo/test_GPUs/utils/python/2.7.12/lib/python2.7/site-packages
 
 # Train
-python 1_preprocess_data_para_cada_dia_2.py -D /home/fcsc/ccalvo/METEO/preproces/dataset_train/raw -O /home/fcsc/ccalvo/METEO/nc_train
+#python 1_preprocess_data_para_cada_dia_2.py -D /home/fcsc/ccalvo/METEO/preproces/dataset_train/raw -O /home/fcsc/ccalvo/METEO/nc_train
+python 1_preprocess_data_para_cada_dia_2.py -D /home/fcsc/ccalvo/METEO/preproces/dataset_train/new_raw -O /home/fcsc/ccalvo/METEO/preproces/dataset_train/new_nc_train
+
+# Pruebas - no ejecutar -
 #python filter_nc_variables.py -D /home/fcsc/ccalvo/METEO/preproces/dataset_train/raw -O /home/fcsc/ccalvo/METEO/nc_train
 # Validation
 #python filter_nc_variables.py -D ~/preproces/dataset_validation/raw -O /home/fcsc/ccalvo/METEO/nc_val

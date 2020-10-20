@@ -17,7 +17,8 @@ export LD_LIBRARY_PATH=/home/fcsc/ccalvo/test_GPUs/utils/python/2.7.12/lib:$LD_L
 export PYTHONPATH=/home/fcsc/ccalvo/test_GPUs/utils/python/2.7.12/lib/python2.7/site-packages
 
 # Train
-python create_csv.py -D /home/fcsc/ccalvo/METEO/nc_train -O /home/fcsc/ccalvo/METEO/csv_rangos_y_mse_sin_pow_train -f datos_interpolados.nc
+#python create_csv_trihorario.py -D /home/fcsc/ccalvo/METEO/nc_train -O /home/fcsc/ccalvo/METEO/csv_trihorario_train_rangosEduardo -f /home/fcsc/ccalvo/METEO/datos_interpolados.nc
+python create_csv_trihorario.py -D /home/fcsc/ccalvo/METEO/preproces/dataset_train/new_nc_train -O /home/fcsc/ccalvo/METEO/csv_trihorario_train_rangosEduardo_tmp -f /home/fcsc/ccalvo/METEO/datos_interpolados.nc
 
 # Validation
-#python create_csv.py -D /home/fcsc/ccalvo/METEO/nc_val -O /home/fcsc/ccalvo/METEO/csv_rangos_y_mse_sin_pow_val -f datos_interpolados.nc
+#python create_csv_trihorario.py -D /home/fcsc/ccalvo/METEO/nc_val -O /home/fcsc/ccalvo/METEO/csv_trihorario_val_rangosEduardo -f /home/fcsc/ccalvo/METEO/datos_interpolados.nc
