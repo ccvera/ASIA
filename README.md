@@ -1,4 +1,4 @@
-# ML METEO
+# Aportaciones de la supercomputación y el aprendizaje automatico al cálculo de la incertidumbre asociada a las predicciones meteorológicas
 
 Estructura del repositorio:
 - **RaP**: contiene el fuente de la herramienta
