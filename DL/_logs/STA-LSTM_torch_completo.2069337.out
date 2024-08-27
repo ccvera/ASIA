@@ -1,0 +1,87 @@
+ 
+:: initializing oneAPI environment ...
+   slurm_script: BASH_VERSION = 4.2.46(2)-release
+:: advisor -- latest
+:: ccl -- latest
+:: clck -- latest
+:: compiler -- latest
+:: dal -- latest
+:: debugger -- latest
+:: dev-utilities -- latest
+:: dnnl -- latest
+:: dpcpp-ct -- latest
+:: dpl -- latest
+:: inspector -- latest
+:: intelpython -- latest
+:: ipp -- latest
+:: ippcp -- latest
+:: ipp -- latest
+:: itac -- latest
+:: mkl -- latest
+:: mpi -- latest
+:: tbb -- latest
+:: vpl -- latest
+:: vtune -- latest
+:: oneAPI environment initialized ::
+ 
+Epoch 1/50, Loss: 0.2508966028690338
+Epoch 2/50, Loss: 0.27155518531799316
+Epoch 3/50, Loss: 0.19903981685638428
+Epoch 4/50, Loss: 0.23922529816627502
+Epoch 5/50, Loss: 0.28014075756073
+Epoch 6/50, Loss: 0.3642166256904602
+Epoch 7/50, Loss: 0.3425009846687317
+Epoch 8/50, Loss: 0.2375449687242508
+Epoch 9/50, Loss: 0.34759238362312317
+Epoch 10/50, Loss: 0.4488259255886078
+Epoch 11/50, Loss: 0.06887694448232651
+Epoch 12/50, Loss: 0.24922214448451996
+Epoch 13/50, Loss: 0.15787410736083984
+Epoch 14/50, Loss: 0.16291001439094543
+Epoch 15/50, Loss: 0.17612536251544952
+Epoch 16/50, Loss: 0.24933883547782898
+Epoch 17/50, Loss: 0.16466470062732697
+Epoch 18/50, Loss: 0.19109469652175903
+Epoch 19/50, Loss: 0.4266246557235718
+Epoch 20/50, Loss: 0.2990111708641052
+Epoch 21/50, Loss: 0.13619662821292877
+Epoch 22/50, Loss: 0.28548580408096313
+Epoch 23/50, Loss: 0.3442806303501129
+Epoch 24/50, Loss: 0.17252454161643982
+Epoch 25/50, Loss: 0.23330754041671753
+Epoch 26/50, Loss: 0.16228510439395905
+Epoch 27/50, Loss: 0.25583285093307495
+Epoch 28/50, Loss: 0.21401487290859222
+Epoch 29/50, Loss: 0.31877151131629944
+Epoch 30/50, Loss: 0.2903372049331665
+Epoch 31/50, Loss: 0.17648427188396454
+Epoch 32/50, Loss: 0.17716853320598602
+Epoch 33/50, Loss: 0.3621937930583954
+Epoch 34/50, Loss: 0.19261404871940613
+Epoch 35/50, Loss: 0.19760525226593018
+Epoch 36/50, Loss: 0.30815643072128296
+Epoch 37/50, Loss: 0.17031912505626678
+Epoch 38/50, Loss: 0.1971554011106491
+Epoch 39/50, Loss: 0.11415457725524902
+Epoch 40/50, Loss: 0.14640405774116516
+Epoch 41/50, Loss: 0.303872287273407
+Epoch 42/50, Loss: 0.3177400827407837
+Epoch 43/50, Loss: 0.2467532455921173
+Epoch 44/50, Loss: 0.4729197919368744
+Epoch 45/50, Loss: 0.20948895812034607
+Epoch 46/50, Loss: 0.3390151560306549
+Epoch 47/50, Loss: 0.2829572558403015
+Epoch 48/50, Loss: 0.34137243032455444
+Epoch 49/50, Loss: 0.1911897212266922
+Epoch 50/50, Loss: 0.28107625246047974
+Accuracy: 0.9046126095924767
+Classification Report:
+              precision    recall  f1-score   support
+
+         0.0       0.92      0.94      0.93   2708744
+         1.0       0.86      0.84      0.85   1288451
+
+    accuracy                           0.90   3997195
+   macro avg       0.89      0.89      0.89   3997195
+weighted avg       0.90      0.90      0.90   3997195
+

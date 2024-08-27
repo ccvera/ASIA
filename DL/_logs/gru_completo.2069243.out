@@ -1,0 +1,83 @@
+2024-08-12 18:03:02.066784: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcudart.so.11.0
+2024-08-12 18:18:32.691002: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcuda.so.1
+2024-08-12 18:18:34.931420: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
+pciBusID: 0000:3b:00.0 name: Tesla V100-PCIE-16GB computeCapability: 7.0
+coreClock: 1.38GHz coreCount: 80 deviceMemorySize: 15.77GiB deviceMemoryBandwidth: 836.37GiB/s
+2024-08-12 18:18:34.962951: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcudart.so.11.0
+2024-08-12 18:18:35.028401: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcublas.so.11
+2024-08-12 18:18:35.028509: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcublasLt.so.11
+2024-08-12 18:18:35.049365: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcufft.so.10
+2024-08-12 18:18:35.096793: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcurand.so.10
+2024-08-12 18:18:35.150955: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcusolver.so.11
+2024-08-12 18:18:35.169860: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcusparse.so.11
+2024-08-12 18:18:35.173350: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcudnn.so.8
+2024-08-12 18:18:35.192125: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1871] Adding visible gpu devices: 0
+2024-08-12 18:18:35.263505: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-08-12 18:18:35.266439: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
+pciBusID: 0000:3b:00.0 name: Tesla V100-PCIE-16GB computeCapability: 7.0
+coreClock: 1.38GHz coreCount: 80 deviceMemorySize: 15.77GiB deviceMemoryBandwidth: 836.37GiB/s
+2024-08-12 18:18:35.266749: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1871] Adding visible gpu devices: 0
+2024-08-12 18:18:35.310645: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcudart.so.11.0
+2024-08-12 18:18:39.650026: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1258] Device interconnect StreamExecutor with strength 1 edge matrix:
+2024-08-12 18:18:39.650260: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]      0 
+2024-08-12 18:18:39.650299: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1277] 0:   N 
+2024-08-12 18:18:39.708989: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1418] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 14643 MB memory) -> physical GPU (device: 0, name: Tesla V100-PCIE-16GB, pci bus id: 0000:3b:00.0, compute capability: 7.0)
+2024-08-12 18:18:49.373344: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:176] None of the MLIR Optimization Passes are enabled (registered 2)
+2024-08-12 18:18:49.540423: I tensorflow/core/platform/profile_utils/cpu_utils.cc:114] CPU Frequency: 2600000000 Hz
+2024-08-12 18:18:52.916772: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcudnn.so.8
+2024-08-12 18:18:53.708857: I tensorflow/stream_executor/cuda/cuda_dnn.cc:359] Loaded cuDNN version 8100
+2024-08-12 18:18:54.624423: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcublas.so.11
+2024-08-12 18:18:55.381870: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcublasLt.so.11
+2024-08-12 18:31:04.179409: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 2200056128 exceeds 10% of free system memory.
+Epoch 1/20
+399720/399720 - 821s - loss: 0.3110 - accuracy: 0.8627 - val_loss: 0.2769 - val_accuracy: 0.8809
+Epoch 2/20
+399720/399720 - 763s - loss: 0.2893 - accuracy: 0.8746 - val_loss: 0.2676 - val_accuracy: 0.8860
+Epoch 3/20
+399720/399720 - 762s - loss: 0.2834 - accuracy: 0.8780 - val_loss: 0.2623 - val_accuracy: 0.8888
+Epoch 4/20
+399720/399720 - 765s - loss: 0.2806 - accuracy: 0.8795 - val_loss: 0.2591 - val_accuracy: 0.8904
+Epoch 5/20
+399720/399720 - 759s - loss: 0.2786 - accuracy: 0.8806 - val_loss: 0.2568 - val_accuracy: 0.8917
+Epoch 6/20
+399720/399720 - 757s - loss: 0.2772 - accuracy: 0.8814 - val_loss: 0.2556 - val_accuracy: 0.8927
+Epoch 7/20
+399720/399720 - 762s - loss: 0.2760 - accuracy: 0.8820 - val_loss: 0.2542 - val_accuracy: 0.8929
+Epoch 8/20
+399720/399720 - 758s - loss: 0.2753 - accuracy: 0.8826 - val_loss: 0.2547 - val_accuracy: 0.8931
+Epoch 9/20
+399720/399720 - 762s - loss: 0.2749 - accuracy: 0.8828 - val_loss: 0.2524 - val_accuracy: 0.8939
+Epoch 10/20
+399720/399720 - 774s - loss: 0.2741 - accuracy: 0.8833 - val_loss: 0.2530 - val_accuracy: 0.8940
+Epoch 11/20
+399720/399720 - 767s - loss: 0.2733 - accuracy: 0.8837 - val_loss: 0.2520 - val_accuracy: 0.8945
+Epoch 12/20
+399720/399720 - 764s - loss: 0.2729 - accuracy: 0.8839 - val_loss: 0.2518 - val_accuracy: 0.8945
+Epoch 13/20
+399720/399720 - 765s - loss: 0.2726 - accuracy: 0.8842 - val_loss: 0.2514 - val_accuracy: 0.8945
+Epoch 14/20
+399720/399720 - 763s - loss: 0.2723 - accuracy: 0.8842 - val_loss: 0.2511 - val_accuracy: 0.8955
+Epoch 15/20
+399720/399720 - 773s - loss: 0.2722 - accuracy: 0.8844 - val_loss: 0.2525 - val_accuracy: 0.8944
+Epoch 16/20
+399720/399720 - 768s - loss: 0.2718 - accuracy: 0.8846 - val_loss: 0.2523 - val_accuracy: 0.8947
+Epoch 17/20
+399720/399720 - 758s - loss: 0.2716 - accuracy: 0.8848 - val_loss: 0.2516 - val_accuracy: 0.8950
+Epoch 18/20
+399720/399720 - 758s - loss: 0.2716 - accuracy: 0.8848 - val_loss: 0.2517 - val_accuracy: 0.8951
+Epoch 19/20
+399720/399720 - 761s - loss: 0.2713 - accuracy: 0.8849 - val_loss: 0.2499 - val_accuracy: 0.8957
+Epoch 20/20
+399720/399720 - 758s - loss: 0.2712 - accuracy: 0.8850 - val_loss: 0.2502 - val_accuracy: 0.8956
+2024-08-12 22:34:13.419333: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 2750070160 exceeds 10% of free system memory.
+Accuracy: 0.8952
+              precision    recall  f1-score   support
+
+     No Rain     0.9269    0.9176    0.9223   2708922
+        Rain     0.8304    0.8479    0.8390   1288273
+
+    accuracy                         0.8952   3997195
+   macro avg     0.8787    0.8828    0.8806   3997195
+weighted avg     0.8958    0.8952    0.8954   3997195
+
