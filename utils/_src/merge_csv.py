@@ -1,6 +1,6 @@
 import logging
 logging.basicConfig(level=logging.INFO, filename='preprocess.log', format='%(asctime)s: %(levelname)s - %(message)s')
-logger = logging.getLogger('RaP')
+logger = logging.getLogger('ASIA')
 # set up logging to console
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
@@ -8,7 +8,7 @@ console.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s: %(levelname)s - %(message)s')
 console.setFormatter(formatter)
 # add the handler to the root logger
-logging.getLogger('RaP').addHandler(console)
+logging.getLogger('ASIA').addHandler(console)
 logger = logging.getLogger(__name__)
 
 logger.info('Started creating merged csv...')
