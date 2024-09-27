@@ -1,37 +1,33 @@
 # Aportaciones de la supercomputación y el aprendizaje automatico al cálculo de la incertidumbre asociada a las predicciones meteorológicas
 
+**ASIA - Aportaciones Supercomputación e Inteligencia Artificial**
+
 Estructura del repositorio:
-- **RaP**: contiene el fuente de la herramienta
-- **data**: contiene datos en crudo de ejemplo para el uso de los scripts de preprocesamiento almacenados en "utils".
+- **DL**: código de los modelos basados en *deep learning*. Incluye los *scripts* de ejecución de SLURM.
+- **QML**: código de los modelos basados en *quantum machine learning*. Incluye los *scripts* de ejecución de SLURM.
+- **data_example**: contiene datos en crudo de ejemplo para el uso de los scripts de preprocesamiento almacenados en "utils".
   - raw: datos en crudo obtenidos de las simulaciones del modelo WRF.
   - nc: scripts filtrados con las variables que necesitamos.
   - csv: ficheros ya procesados que conformarán el _dataset.
-- **reports**: contienen informes con los resultados obtenidos por la herramienta.
 - **utils**: conjunto de scripts para llevar a cabo el preprocesamiento de los datos.
 
-## Prerrequisitos
-- Python 2.7
-- wrf.python
-- scikit-learn
-
-## Preprocesamiento dataset
+## Repositorio completo
 ```
-$ cd utils
+https://zenodo.org/records/6421268
 ```
 
-Para filtrar las salidas del WRF y obtener únicamente las variables que necesitamos:
+## Publicaciones
 ```
- $ python filter_nc_variables.py -D <raw_data_dir> -O <output_nc_dir>
+@article{calvo2024real,
+  title={Real-Time Evaluation of the Uncertainty in Weather Forecasts Through Machine Learning-Based Models},
+  author={Calvo-Olivera, Carmen and Guerrero-Higueras, {\'A}ngel Manuel and Lorenzana, Jes{\'u}s and Garc{\'\i}a-Ortega, Eduardo},
+  journal={Water Resources Management},
+  volume={38},
+  number={7},
+  pages={2455--2470},
+  year={2024},
+  publisher={Springer}
+}
 ```
 
-Para convertir nuetro .nc filtrado en un .csv:
-```
-$ python create_csv.py -D <output_nc_dir> -O <output_csv_di> -f datos_interpolados.nc
-```
-
-Donde el fichero datos interpolados, corresponde a la verdad terreno obtenida de las mediciones de los pluviómetros de la CHE.
-
-Finalmente, obtenemos un .csv único, el cual almacenará toda la información:
-```
-$ python merge_csv.py -t <dataset_csv_train_dir> -v <dataset_csv_validation_dir>
-```
+Copyright &copy; Carmen Calvo Olivera
